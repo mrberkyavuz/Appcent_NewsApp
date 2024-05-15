@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="article_image">Article Image</string>
+    <string name="read_more">Read More</string>
+</resources>
