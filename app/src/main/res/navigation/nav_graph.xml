@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_newsFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_newsFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
 
     <fragment
@@ -19,11 +22,13 @@
         tools:layout="@layout/fragment_details">
         <argument
             android:name="article"
-            app:argType="com.berkyavuz.newsapp.model.response.Article"
-            app:nullable="false" />
+            app:argType="com.berkyavuz.newsapp.model.response.Article" />
         <action
             android:id="@+id/action_detailsFragment_to_webViewFragment"
             app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/action_detailsFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
 
     <fragment
@@ -32,8 +37,7 @@
         tools:layout="@layout/fragment_webview">
         <argument
             android:name="url"
-            app:argType="string"
-            app:nullable="false" />
+            app:argType="string" />
     </fragment>
 
     <fragment

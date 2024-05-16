@@ -5,15 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.SearchView
+import com.berkyavuz.newsapp.R
 import com.berkyavuz.newsapp.databinding.FragmentNewsBinding
 import com.berkyavuz.newsapp.ui.adapters.NewsAdapter
 import com.berkyavuz.newsapp.ui.viewmodels.NewsViewModel
-import android.widget.SearchView
-import com.berkyavuz.newsapp.R
 import com.berkyavuz.newsapp.network.RetrofitClient
 import com.berkyavuz.newsapp.model.database.AppDatabase
 import com.berkyavuz.newsapp.repository.ArticleRepository
@@ -38,20 +38,13 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // ArticleDao ve NewsService'yi al
         val articleDao = AppDatabase.getDatabase(requireContext()).articleDao()
         val newsService = RetrofitClient.instance
-
-        // articleRepository'yi başlat
         articleRepository = ArticleRepository(articleDao, newsService)
-
-        // ViewModel'i başlat
         viewModel = ViewModelProvider(this, NewsViewModel.Factory(articleRepository)).get(NewsViewModel::class.java)
 
         setupRecyclerView()
         setupSearchView()
-
-        // Default olarak bir arama terimiyle başlatabiliriz
         performSearch("besiktas")
     }
 

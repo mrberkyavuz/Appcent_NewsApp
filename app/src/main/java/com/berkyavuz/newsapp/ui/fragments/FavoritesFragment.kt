@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.berkyavuz.newsapp.databinding.FragmentFavoritesBinding
 import com.berkyavuz.newsapp.ui.adapters.NewsAdapter
 import com.berkyavuz.newsapp.ui.viewmodels.FavoritesViewModel

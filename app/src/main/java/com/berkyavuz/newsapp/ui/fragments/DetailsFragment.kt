@@ -79,7 +79,7 @@ class DetailsFragment : Fragment() {
     }
 
     private fun insertArticleToFavorites(article: ArticleEntity) {
-        viewLifecycleOwner.lifecycleScope.launch {
+        lifecycleScope.launch {
             articleRepository.insertArticle(article)
             Toast.makeText(requireContext(), "Added to favorites", Toast.LENGTH_SHORT).show()
         }

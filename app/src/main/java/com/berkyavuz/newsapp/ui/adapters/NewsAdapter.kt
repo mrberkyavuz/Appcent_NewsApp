@@ -8,9 +8,10 @@ import com.berkyavuz.newsapp.model.response.Article
 import com.bumptech.glide.Glide
 
 class NewsAdapter(
-    private val articles: MutableList<Article> = mutableListOf(),
-    private val onItemClickListener: ((Article) -> Unit)? = null
+    private val onItemClickListener: (Article) -> Unit
 ) : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
+
+    private val articles: MutableList<Article> = mutableListOf()
 
     fun submitList(newArticles: List<Article>) {
         articles.clear()
@@ -35,8 +36,9 @@ class NewsAdapter(
             binding.textViewTitle.text = article.title
             binding.textViewSummary.text = article.description
             Glide.with(binding.imageViewNews.context).load(article.urlToImage).into(binding.imageViewNews)
-            itemView.setOnClickListener {
-                onItemClickListener?.invoke(article)
+
+            binding.root.setOnClickListener {
+                onItemClickListener.invoke(article)
             }
         }
     }
