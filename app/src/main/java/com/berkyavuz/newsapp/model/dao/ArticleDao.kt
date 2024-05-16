@@ -9,11 +9,12 @@ import com.berkyavuz.newsapp.model.entity.ArticleEntity
 
 @Dao
 interface ArticleDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertArticle(article: ArticleEntity)
+    suspend fun insertArticle(article: ArticleEntity): Long
 
     @Delete
-    suspend fun deleteArticle(article: ArticleEntity)
+    suspend fun deleteArticle(article: ArticleEntity): Int
 
     @Query("SELECT * FROM articles")
     suspend fun getAllArticles(): List<ArticleEntity>

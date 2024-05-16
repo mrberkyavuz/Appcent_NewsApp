@@ -1,12 +1,8 @@
 package com.berkyavuz.newsapp.repository
 
-import com.berkyavuz.newsapp.api.NewsApiService
-import com.berkyavuz.newsapp.model.response.NewsResponse
-import javax.inject.Inject
+import com.berkyavuz.newsapp.network.service.NewsService
 
-class NewsRepository @Inject constructor(private val apiService: NewsApiService) {
-    suspend fun getNews(query: String, apiKey: String, page: Int): NewsResponse {
-        return apiService.getNews(query, apiKey, page)
-    }
+class NewsRepository(private val apiService: NewsService) {
+    suspend fun getNews(query: String, apiKey: String, page: Int) = apiService.searchNews(query, apiKey, page)
 }
 

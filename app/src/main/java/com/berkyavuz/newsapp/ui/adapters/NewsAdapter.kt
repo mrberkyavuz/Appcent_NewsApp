@@ -1,17 +1,16 @@
 package com.berkyavuz.newsapp.ui.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.berkyavuz.newsapp.databinding.ItemNewsBinding
 import com.berkyavuz.newsapp.model.response.Article
-import com.berkyavuz.newsapp.ui.fragments.NewsFragmentDirections
 import com.bumptech.glide.Glide
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
-
-    private val articles = mutableListOf<Article>()
+class NewsAdapter(
+    private val articles: MutableList<Article> = mutableListOf()
+) : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     fun submitList(newArticles: List<Article>) {
         articles.clear()
@@ -25,7 +24,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        holder.bind(articles[position])
+        val article = articles[position]
+        holder.bind(article)
     }
 
     override fun getItemCount(): Int = articles.size
@@ -34,12 +34,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         fun bind(article: Article) {
             binding.textViewTitle.text = article.title
             binding.textViewSummary.text = article.description
-            Glide.with(binding.root.context).load(article.urlToImage).into(binding.imageViewNews)
-
-            binding.root.setOnClickListener { view ->
-                val action = NewsFragmentDirections.actionNewsFragmentToDetailsFragment(article)
-                view.findNavController().navigate(action)
-            }
+            Glide.with(binding.imageViewNews.context).load(article.urlToImage).into(binding.imageViewNews)
         }
     }
 }
