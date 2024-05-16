@@ -50,7 +50,7 @@ class NewsFragment : Fragment() {
         setupSearchView()
 
         // Default arama
-        performSearch("appcent")
+        performSearch("turkey")
     }
 
     private fun setupRecyclerView() {
