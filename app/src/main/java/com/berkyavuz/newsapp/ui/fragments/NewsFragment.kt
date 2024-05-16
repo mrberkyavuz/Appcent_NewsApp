@@ -45,7 +45,7 @@ class NewsFragment : Fragment() {
 
         setupRecyclerView()
         setupSearchView()
-        performSearch("besiktas")
+        performSearch("galatasaray")
     }
 
     private fun setupRecyclerView() {
