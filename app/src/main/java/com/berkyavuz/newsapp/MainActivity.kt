@@ -6,9 +6,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.berkyavuz.newsapp.databinding.ActivityMainBinding
+import androidx.navigation.ui.AppBarConfiguration
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,14 +19,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ActionBar'ı ayarlayın
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
         val navController = navHostFragment.navController
 
-        NavigationUI.setupActionBarWithNavController(this, navController)
+        val appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.newsFragment,
+            R.id.favoritesFragment
+        ))
+
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.bottomNavigationView.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {

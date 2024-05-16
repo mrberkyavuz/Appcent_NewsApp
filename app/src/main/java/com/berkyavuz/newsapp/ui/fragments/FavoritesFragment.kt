@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
 import com.berkyavuz.newsapp.databinding.FragmentFavoritesBinding
 import com.berkyavuz.newsapp.ui.adapters.NewsAdapter
 import com.berkyavuz.newsapp.ui.viewmodels.FavoritesViewModel
@@ -66,7 +67,10 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        newsAdapter = NewsAdapter()
+        newsAdapter = NewsAdapter { article ->
+            val action = FavoritesFragmentDirections.actionFavoritesFragmentToDetailsFragment(article)
+            findNavController().navigate(action)
+        }
         binding.recyclerViewFavorites.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(requireContext())

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.berkyavuz.newsapp.databinding.FragmentNewsBinding
 import com.berkyavuz.newsapp.ui.adapters.NewsAdapter
@@ -49,12 +51,15 @@ class NewsFragment : Fragment() {
         setupRecyclerView()
         setupSearchView()
 
-        // Default arama
-        performSearch("turkey")
+        // Default olarak bir arama terimiyle başlatabiliriz
+        performSearch("besiktas")
     }
 
     private fun setupRecyclerView() {
-        newsAdapter = NewsAdapter()
+        newsAdapter = NewsAdapter { article ->
+            val action = NewsFragmentDirections.actionNewsFragmentToDetailsFragment(article)
+            findNavController().navigate(action)
+        }
         binding.recyclerViewNews.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -78,7 +83,7 @@ class NewsFragment : Fragment() {
     }
 
     private fun performSearch(query: String) {
-        viewModel.getNews(query, "528d24d42f904de19b0fedcd1408bcf6", 1).observe(viewLifecycleOwner, { result ->
+        viewModel.getNews(query, "528d24d42f904de19b0fedcd1408bcf6", 1).observe(viewLifecycleOwner, Observer { result ->
             result.fold(onSuccess = { articles ->
                 newsAdapter.submitList(articles ?: mutableListOf())
             }, onFailure = {

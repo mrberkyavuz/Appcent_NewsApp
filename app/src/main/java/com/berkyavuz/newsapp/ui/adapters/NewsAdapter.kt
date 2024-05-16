@@ -1,7 +1,6 @@
 package com.berkyavuz.newsapp.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.berkyavuz.newsapp.databinding.ItemNewsBinding
@@ -9,7 +8,8 @@ import com.berkyavuz.newsapp.model.response.Article
 import com.bumptech.glide.Glide
 
 class NewsAdapter(
-    private val articles: MutableList<Article> = mutableListOf()
+    private val articles: MutableList<Article> = mutableListOf(),
+    private val onItemClickListener: ((Article) -> Unit)? = null
 ) : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     fun submitList(newArticles: List<Article>) {
@@ -35,6 +35,9 @@ class NewsAdapter(
             binding.textViewTitle.text = article.title
             binding.textViewSummary.text = article.description
             Glide.with(binding.imageViewNews.context).load(article.urlToImage).into(binding.imageViewNews)
+            itemView.setOnClickListener {
+                onItemClickListener?.invoke(article)
+            }
         }
     }
 }

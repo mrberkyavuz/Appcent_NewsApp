@@ -35,4 +35,13 @@
             app:argType="string"
             app:nullable="false" />
     </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.berkyavuz.newsapp.ui.fragments.FavoritesFragment"
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_favoritesFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 </navigation>
