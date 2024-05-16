@@ -49,8 +49,8 @@ class NewsFragment : Fragment() {
         setupRecyclerView()
         setupSearchView()
 
-        // Default olarak bir arama terimiyle başlatabiliriz
-        performSearch("besiktas")
+        // Default arama
+        performSearch("appcent")
     }
 
     private fun setupRecyclerView() {
